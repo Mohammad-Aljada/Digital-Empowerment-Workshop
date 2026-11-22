@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ورشة التمكين الرقمي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: a warm, confident sales page in Walaa's own voice
+   IDEA the profile itself: the page shows the account the buyer will walk out with
+   PICTURE a large profile card (header, photo, clear bio, highlights) with client messages arriving
+   COLOUR Walaa's brand: navy ground, cream, sharp yellow accent, blue support
+   TYPE IBM Plex Sans Arabic 700 + 400
+   LAYOUT laptop: headline + CTA beside the profile card on navy; phone: headline, card, button, sticky booking bar */
+:root{color-scheme:light dark;--bg:light-dark(#fbf6ea,#0a1528);--ink:light-dark(#0f2547,#f4eedf);--soft:light-dark(#4a5a75,#b9c2d3);--navy:#0f2547;--blue:#2f6fd6;--yel:#ffc934;--cream:#fbf6ea;--card:light-dark(#ffffff,#13223f);--line:light-dark(#e6dcc4,#24365a)}
+:root[data-theme=light]{color-scheme:light}
+:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 "IBM Plex Sans Arabic",Tahoma,sans-serif;overflow-x:clip}
+.band{padding-block:clamp(40px,6vw,88px);padding-inline:max(5vw,16px)}
+.wrap{max-width:1160px;margin-inline:auto}
+h1,h2,h3{line-height:1.25;margin:0;text-wrap:balance;font-weight:700}
+h2{font-size:clamp(28px,3.6vw,40px);margin-bottom:22px}
+h3{font-size:21px;margin-bottom:8px}
+p{margin:0 0 14px}
+.btn{display:inline-flex;align-items:center;gap:10px;background:var(--yel);color:var(--navy);font-weight:700;font-size:18px;padding:14px 28px;border-radius:999px;text-decoration:none;min-height:52px;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.btn svg{width:22px;height:22px;flex:none}
+/* hero */
+.hero{background:var(--navy);color:var(--cream)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center}
+.tag{display:inline-block;background:rgba(255,201,52,.14);color:var(--yel);border-radius:999px;padding:6px 16px;font-size:15px;font-weight:600;margin-bottom:20px}
+.hero h1{font-size:clamp(30px,4.2vw,48px);margin-bottom:18px}
+.hero h1 span{display:block;font-size:.62em;font-weight:600;color:#c9d6ee;margin-bottom:6px}
+.hero .lead{font-size:clamp(18px,1.8vw,21px);color:#dfe6f3;max-width:34em;margin-bottom:28px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;color:#c9d6ee;font-size:15px}
+.facts b{color:var(--cream);font-weight:600}
+/* profile picture */
+.phone{background:#fff;color:#0f2547;border-radius:28px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.6);position:relative;max-width:420px;margin-inline:auto;width:100%}
+.ph-head{height:112px;background:linear-gradient(135deg,#2f6fd6,#0f2547);color:#fff;display:flex;align-items:center;padding:0 22px;font-weight:700;font-size:17px;line-height:1.4}
+.ph-head i{font-style:normal;color:var(--yel)}
+.ph-body{padding:0 22px 22px}
+.avatar{width:86px;height:86px;border-radius:50%;border:4px solid #fff;margin-top:-43px;background:#fbf6ea;display:grid;place-items:center;overflow:hidden}
+.ph-name{font-weight:700;font-size:20px;margin-top:8px}
+.ph-role{color:#2f6fd6;font-weight:600;font-size:15px}
+.ph-bio{margin:12px 0 16px;padding:0;list-style:none;font-size:15px;line-height:1.6}
+.ph-bio li{display:flex;gap:8px;margin-bottom:4px}
+.ph-bio li::before{content:"←";color:#2f6fd6;font-weight:700}
+.hl{display:flex;gap:14px}
+.hl div{text-align:center;font-size:13px;font-weight:600}
+.hl span{display:block;width:54px;height:54px;border-radius:50%;border:3px solid var(--yel);background:#fbf6ea;margin:0 auto 4px;display:grid;place-items:center;color:#0f2547;font-size:20px}
+.msgs{position:absolute;inset-inline-start:-14px;bottom:18px;display:grid;gap:8px;max-width:76%}
+.msg{background:var(--yel);color:#0f2547;font-size:14px;font-weight:600;padding:9px 14px;border-radius:16px 16px 4px 16px;box-shadow:0 8px 20px -10px rgba(0,0,0,.5);animation:pop .6s both}
+.msg:nth-child(2){animation-delay:.5s;background:#fff;border:2px solid var(--yel)}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.msg{animation:none}.btn{transition:none}}
+.note{font-size:14px;color:#9fb0cc;text-align:center;margin-top:12px}
+/* problem */
+.problem .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.story p{font-size:19px}
+.quote{border-inline-start:4px solid var(--yel);padding-inline-start:18px;font-size:22px;font-weight:600;margin:18px 0}
+/* before */
+.before{background:var(--card);border-block:1px solid var(--line)}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;padding:0;list-style:none}
+.checks li{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;gap:12px;align-items:flex-start}
+.checks li::before{content:"";flex:none;width:22px;height:22px;border-radius:6px;border:2px solid var(--blue);margin-top:4px}
+.after-note{margin-top:22px;font-weight:600;font-size:19px}
+/* during */
+.route{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;position:relative;counter-reset:s}
+.stop{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px 22px;position:relative}
+.stop .n{width:48px;height:48px;border-radius:50%;background:var(--navy);color:var(--yel);display:grid;place-items:center;font-weight:700;font-size:20px;margin-bottom:14px}
+:root[data-theme=dark] .stop .n{background:var(--blue);color:#fff}
+.stop ul{margin:10px 0 0;padding:0;list-style:none}
+.stop li{padding:7px 0;border-top:1px dashed var(--line);font-size:16px}
+.intro{max-width:46em;font-size:19px;margin-bottom:30px}
+/* after */
+.after{background:var(--navy);color:var(--cream)}
+.split{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,56px);align-items:center}
+.after .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px}
+.me{position:relative;max-width:440px;margin-inline:auto;width:100%}
+.me img{display:block;width:100%;height:auto;border-radius:28px;border:5px solid var(--yel);box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.after .grid div{border-top:2px solid rgba(255,201,52,.5);padding-top:14px}
+.after h3{color:var(--yel)}
+.after p{color:#dfe6f3}
+.promise{margin-top:30px;background:rgba(255,255,255,.06);border-radius:20px;padding:22px 24px;font-size:19px;color:var(--cream)}
+.proof .tqs{columns:3 280px;column-gap:18px}
+.tq{break-inside:avoid;margin:0 0 18px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px}
+.tq blockquote{margin:0 0 12px;font-size:18px;font-weight:500;line-height:1.7}
+.tq figcaption{font-size:15px;color:var(--soft)}
+.tq figcaption b{color:var(--blue)}
+.shots-t{margin:28px 0 14px}
+.shots{columns:3 280px;column-gap:20px}
+.pc{break-inside:avoid;margin:0 0 20px;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:10px;box-shadow:0 18px 36px -24px rgba(15,37,71,.45)}
+.pc img{display:block;width:100%;height:auto;border-radius:16px}
+.pc figcaption{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 8px 4px;font-size:14px;color:var(--soft)}
+.pc figcaption b{color:var(--blue);font-size:15px}
+
+.bonus{margin-top:22px;display:flex;gap:18px;align-items:center;background:var(--navy);color:var(--cream);border-radius:22px;padding:24px 26px}
+.bonus svg{width:56px;height:56px;flex:none}
+.bonus h3{color:var(--yel)}
+.bonus p{margin:0;color:#dfe6f3}
+.bridge{display:flex;align-items:center;gap:10px;margin:30px 0 0;font-size:20px;font-weight:600;color:var(--blue)}
+.bridge i{font-style:normal;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--yel);color:var(--navy);font-size:18px;flex:none;animation:bob 2s ease-in-out infinite}
+.after .bridge,.hero .bridge{color:var(--yel)}
+@keyframes bob{50%{transform:translateY(4px)}}
+@media(prefers-reduced-motion:reduce){.bridge i{animation:none}}
+.midcta{margin-top:28px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:var(--navy);color:var(--cream);border-radius:22px;padding:22px 26px}
+.midcta p{margin:0;font-size:22px;font-weight:700}
+.fitnext{margin-top:0}
+.fit{padding-bottom:clamp(28px,4vw,48px)}
+.scenes{display:flex;flex-direction:column;gap:16px}
+.scn-intro{font-size:20px;font-weight:600;margin-bottom:4px}
+.scn{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:22px;padding:20px 22px;box-shadow:0 14px 28px -22px rgba(15,37,71,.45)}
+.scn p{margin:0 0 12px;font-size:17px}
+.scn-ic{flex:none;width:46px;height:46px;border-radius:14px;background:var(--navy);color:var(--yel);display:grid;place-items:center}
+.scn-ic svg{width:24px;height:24px}
+.scn-body{flex:1}
+.mock-post{background:var(--cream);border-radius:14px;padding:14px 16px;display:grid;gap:8px}
+.mock-post .ln{display:block;height:9px;border-radius:5px;background:#E3D9C2}
+.w90{width:90%}.w70{width:70%}.w80{width:80%}
+.likes{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:14px;color:var(--soft)}
+.likes svg{width:18px;height:18px}.likes b{color:var(--navy)}
+.mock-dm{background:var(--cream);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:75%;padding:8px 14px;border-radius:16px;font-size:15px;font-weight:500}
+.bub.in{align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:16px 16px 16px 4px}
+.bub.out{align-self:flex-end;background:var(--navy);color:var(--cream);border-radius:16px 16px 4px 16px}
+.seen{align-self:flex-end;font-size:13px;color:var(--soft)}
+.mock-vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vs-col{background:var(--cream);border-radius:14px;padding:12px 14px;display:grid;gap:4px}
+.vs-col b{font-size:15px}
+.vs-col small{font-size:12px;color:var(--soft);margin-bottom:4px}
+.bar{height:10px;border-radius:6px;background:#E3D9C2;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--navy);border-radius:6px}
+.bar.c span{background:var(--yel)}
+.scn.hit{flex-direction:column;gap:6px;background:var(--navy);color:var(--cream);border-color:var(--navy)}
+.scn.hit .big{font-size:24px;font-weight:700;color:var(--yel);margin:0}
+.scn.hit p{color:#DCE4F2;margin:0}
+.scn.timer{align-items:center}
+.clock{position:relative;flex:none;width:72px;height:72px;display:grid;place-items:center}
+.clock svg{position:absolute;inset:0}
+.clock b{font-size:24px;line-height:1;position:relative;margin-top:-8px}
+.clock small{position:absolute;bottom:14px;font-size:11px;color:var(--soft)}
+.scn.timer p{margin:0;font-size:18px;font-weight:600}
+@media(max-width:600px){.mock-vs{grid-template-columns:1fr}}
+.acct{display:block;width:100%;max-width:400px;margin-inline:auto;height:auto;border-radius:24px;border:6px solid #fff;box-shadow:12px 12px 0 var(--yel),0 30px 50px -30px rgba(0,0,0,.5);transform:rotate(-1.5deg)}
+.problem .wrap{grid-template-columns:minmax(0,1fr)!important;gap:28px!important}
+.pts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pts li:last-child{grid-column:1/-1}
+@media(max-width:700px){.pts{grid-template-columns:minmax(0,1fr)}}
+.pts li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px 22px;font-size:17px;line-height:1.75;display:flex;gap:12px;align-items:flex-start}
+.pts li::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--yel);margin-top:10px}
+/* fit */
+.fit .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:22px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px}
+.box ul{margin:0;padding:0;list-style:none}
+.box li{padding:8px 0;display:flex;gap:10px}
+.yes li::before{content:"✓";color:var(--blue);font-weight:700}
+.no li::before{content:"✕";color:#c0392b;font-weight:700}
+/* about */
+.about .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,64px);align-items:center}
+.nums{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.nums div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 10px;text-align:center}
+.nums b{display:block;font-size:clamp(30px,4vw,42px);color:var(--blue);line-height:1.1}
+.nums span{font-size:14px;color:var(--soft)}
+/* details */
+.details{background:var(--yel);color:var(--navy)}
+.details .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center}
+.drow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+.drow div{background:rgba(255,255,255,.55);border-radius:16px;padding:14px 16px}
+.drow small{display:block;font-size:14px;opacity:.8}
+.drow b{font-size:19px;white-space:nowrap}
+.details .btn{background:var(--navy);color:var(--yel)}
+/* faq */
+details.q{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:4px 20px;margin-bottom:12px}
+details.q summary{cursor:pointer;font-weight:600;font-size:18px;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.q summary::after{content:"+";color:var(--blue);font-size:24px;line-height:1}
+details.q[open] summary::after{content:"−"}
+details.q p{color:var(--soft)}
+.faq .wrap{max-width:820px}
+/* close */
+.close{text-align:center}
+.close h2{font-size:clamp(30px,4vw,46px)}
+.sign{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);color:var(--soft);font-size:15px}
+.sign a{color:var(--blue)}
+.sticky{display:none}
+@media(max-width:1100px){.route{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:860px){.split,.hero .wrap,.problem .wrap,.fit .wrap,.about .wrap,.details .wrap{grid-template-columns:minmax(0,1fr)}.route{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.checks,.after .grid{grid-template-columns:minmax(0,1fr)}.msgs{inset-inline-start:-6px}.sticky{display:flex;position:fixed;inset-inline:0;bottom:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--navy);justify-content:center;z-index:5;box-shadow:0 -8px 20px rgba(0,0,0,.2)}.sticky .btn{width:100%;justify-content:center}body{padding-bottom:76px}.hero .btn{width:100%;justify-content:center}}
+section.about{background:#FFFDF7;border-block:1px solid #E6DCC4}
+
+
+/* slider */
+.slider{position:relative;margin-top:28px}
+.slider .track{display:flex;columns:auto;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:22px 4px 24px;align-items:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.slider .track::-webkit-scrollbar{display:none}
+.slider .pc{flex:0 0 clamp(260px,31%,360px);margin:0;scroll-snap-align:start}
+.snav{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:6px}
+.snav button{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--line);background:#fff;color:var(--navy);font:inherit;font-size:20px;cursor:pointer;display:grid;place-items:center;transition:.2s}
+.snav button:hover{background:var(--yel);border-color:var(--yel)}
+.snav button:disabled{opacity:.35;cursor:default;background:#fff;border-color:var(--line)}
+.dots{display:flex;gap:8px}
+.dots i{width:9px;height:9px;border-radius:9px;background:var(--line);cursor:pointer;transition:.25s}
+.dots i.on{width:26px;background:var(--yel)}
+@media(max-width:600px){.slider .pc{flex-basis:84%}}
+.bridge.dk i{background:var(--navy);color:var(--yel)}.bridge.dk span{color:var(--navy)}.details .bridge{margin-top:26px}.detnext{max-width:980px;margin:0 auto;display:flex;justify-content:center}
+@media(max-width:600px){.drow{grid-template-columns:repeat(2,minmax(0,1fr))}.drow b{white-space:normal}}
+@media(min-width:861px){.about .wrap{grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr)}}
+@media(max-width:860px){.about .wrap{grid-template-columns:minmax(0,1fr)!important}}
+@media(max-width:600px){.about .nums b,.about .stat b{font-size:28px}.about .nums span,.about .stat span{font-size:13px}.about .nums div,.about .stat{padding:12px 6px}}
+.aphoto{margin:0;position:relative;max-width:400px;justify-self:center;width:100%}
+.aphoto img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:28px;box-shadow:-14px 14px 0 var(--yel),0 24px 40px -24px rgba(15,37,71,.5)}
+.about .nums,.about .stack{margin-top:24px}
+@media(max-width:860px){.aphoto{max-width:300px;margin-bottom:10px}}
+.pay{margin:4px 0 0;padding:0 22px 6px;list-style:none;display:grid;gap:8px}.pay li{display:flex;gap:10px;align-items:baseline}.pay li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--yel);flex:none;transform:translateY(-2px)}
+.exs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(22px,4vw,48px);align-items:center;margin-top:30px}
+.exs .acct{max-width:none}
+.exnote{margin:26px 0 8px}.note.exnote{font-size:17px;color:#dfe6f3}
+.after .split{display:block;margin-top:34px}
+.after .split .grid,.after .split .gains{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:960px){.after .split .grid,.after .split .gains{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.exs{grid-template-columns:minmax(0,1fr);gap:28px}.exs .acct{max-width:420px}.after .split .grid,.after .split .gains{grid-template-columns:minmax(0,1fr)}}
+</style>
+</head>
+<body>
+
+<header class="band hero">
+  <div class="wrap">
+    <div>
+      <div class="tag">ورشة التمكين الرقمي · الثلاثاء 1 ديسمبر</div>
+      <h1><span>بعد ساعتين فقط!!</span>اعكس خبرتك على حضورك الرقمي واجعل اسمك خيار عملائك الأول</h1>
+      <p class="lead">ورشة عملية للخبراء والمدربين ومقدّمي الخدمات: تموضع واضح، وبروفايل يعبّر عنك، ومحتوى يعكس خبرتك ويفتح لك باب العملاء.</p>
+      <a class="btn wa" href="#">احجز مقعدك عبر واتساب
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.1.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3z"/></svg>
+      </a>
+      <div class="facts"><div>⏱ <b>ساعتين</b> تطبيق عملي</div><div>📅 <b>1 ديسمبر</b></div><div>📁 <b>ملف قوالب جاهزة</b> هدية</div><div>👥 <b>مقاعد محدودة</b></div></div>
+    </div>
+    <div class="me">
+      <img src="walaa.jpg" alt="ولاء حسّان" width="900" height="1125">
+    </div>
+  </div>
+</header>
+
+<section class="band problem">
+  <div class="wrap">
+    <div>
+      <h2>خبرتك واضحة للي اشتغلوا معك</h2>
+      <p class="quote">كيف بتخليها واضحة للي عم يتعرّفوا عليك اليوم؟</p>
+    </div>
+    <div class="story pts-wrap">
+      <p class="scn-intro">خليني أحكيلك شو بيصير معك بالغالب..</p>
+      <ul class="pts">
+        <li>بتفتح حسابك، بتكتب منشور عن شغلك، بتتعب عليه.. بيجيه كم لايك من صحابك وخلص.</li>
+        <li>مرة وحدة بيجيك واحد عالخاص: قديش السعر؟ بتجاوبه.. وبيختفي.</li>
+        <li>وبنفس الوقت بتشوف حدا خبرته أقل منك بكثير، وعنده عملاء ورا بعض!!</li>
+        <li>حسابك ما بعكس هذه الخبرة.. يا ساكت، يا بيحكي عن كل شي إلا عن الشي اللي بتعرف تعمله منيح.</li>
+        <li>والعميل ما عنده وقت يحزّر.. بيفتح الحساب، ما بيفهم، وبيطلع.</li>
+      </ul>
+      <p class="bridge"><span>الخبر الحلو؟ هاد شي بيتصلّح.. بس قبل، خليني أعرّفك على حالي</span><i aria-hidden="true">↓</i></p>
+    </div>
+  </div>
+</section>
+
+<section class="band about">
+  <div class="wrap">
+    <figure class="aphoto"><img src="me3.jpg" alt="ولاء حسّان"></figure>
+    <div>
+      <h2>مين أنا؟</h2>
+      <p>أنا ولاء حسّان، مختصة التسويق بالمحتوى وبناء العلامات الشخصية للخبراء العرب.</p>
+      <p>صار لي 6 سنين بشتغل مع خبراء ومدربين ومقدمي خدمات على لينكد إن وإكس، واشتغلت مع أكثر من 500 علامة تجارية وشخصية، وكنت شريكة نجاح لأكثر من 120 خبير.</p>
+      <p>كل اللي رح أعطيك ياه بالورشة جرّبته مع عملائي.. وشفت شو بيمشي وشو لأ.</p>
+    <div class="nums"><div><b>6</b><span>سنين خبرة</span></div><div><b>+500</b><span>علامة تجارية وشخصية</span></div><div><b>+120</b><span>خبير شريكة نجاحهم</span></div></div>
+      <p class="bridge"><span>وخليني أبدأ معك من وين إنت واقف هلأ</span><i aria-hidden="true">↓</i></p>
+    </div>
+  </div>
+</section>
+
+<section class="band before">
+  <div class="wrap">
+    <h2>قبل الورشة.. إنت هون</h2>
+    <p class="intro">بتعرف حالك إذا:</p>
+    <ul class="checks">
+      <li>صورتك الشخصية حطيتها لأنها حلوة، مش لأنها بتقول إنت مين</li>
+      <li>البايو فيه المسمى الوظيفي وجملة عامة، وما بيقول مين بتساعد ولا كيف</li>
+      <li>بتنزل محتوى لما يجيك مزاج، وبتوقف أسابيع</li>
+      <li>بتكتب معلومات صح، بس ما حدا بيتفاعل</li>
+      <li>بتتردّد تحكي عن خدمتك عشان ما يحسّوا إنك بس بدك تبيع؟</li>
+      <li>ولما حدا يسألك شو بتشتغل بالضبط؟ بتاخد دقيقتين تشرح</li>
+    </ul>
+    <p class="after-note">إذا لقيت حالك بثلاث نقاط فقط.. هالورشة إلك.</p>
+    <p class="bridge"><span>وهاي النقاط بالضبط هي اللي رح نشتغل عليها سوا</span><i aria-hidden="true">↓</i></p>
+  </div>
+</section>
+
+<section class="band during">
+  <div class="wrap">
+    <h2>أثناء الورشة.. رح نشتغل سوا</h2>
+    <p class="intro">الورشة مش محاضرة بتسمعها وبتنساها. رح نمشي خطوة خطوة، وبتطلع وإنت عارف شو تغيّر بحسابك وليش.</p>
+    <div class="route">
+      <div class="stop"><div class="n">1</div><h3>الوضوح.. أول 3 ثواني</h3><p>هون نبدأ من الأساس:</p>
+        <ul><li>الصورة الشخصية اللي بتبني ثقة</li><li>الاسم المهني، وكيف يصير جزء من تموضعك؟</li><li>البايو: مين بتساعد؟ وكيف؟ بجملة وحدة</li><li>الهيدر كإعلان صغير عنك</li><li>الستوري والهايلايت كواجهة لشغلك</li></ul></div>
+      <div class="stop"><div class="n">2</div><h3>محتوى بيعكس خبرتك</h3><p>بعد ما يصير الحساب واضح:</p>
+        <ul><li>كيف تحوّل مواقف شغلك لقصص بتبيع؟ (الستوري تيلينج)</li><li>كيف تحكي عن خدمتك بدون ما تحس إنك بتبيع؟</li><li>وكيف تستمر بالنشر بدون ما تمل بعد أسبوعين؟</li></ul></div>
+      <div class="stop"><div class="n">3</div><h3>التفاعل الذكي</h3><p>وهون تبدأ العلاقات:</p>
+        <ul><li>وين تعلّق ومع مين</li><li>كيف تحوّل التعليق لمحادثة، والمحادثة لعلاقة؟</li><li>وكيف العميل يوصلك هو، بدل ما تركض وراه؟</li></ul></div>
+      <div class="stop"><div class="n">4</div><h3>Claude مساعدك بالمحتوى</h3><p>من التصميم للجدولة والتحليل:</p>
+        <ul><li>كيف تخلّي Claude يصمملك كاروسيل وبوستات بهويتك وألوانك؟</li><li>كيف تحوّل منشورك لستوري أو تصميم بدقائق؟</li><li>وكيف تكتب طلب واضح بيطلعلك نتيجة بتشبهك، مش تصميم عام؟</li><li>كيف تخلّي Claude على متصفح كروم يرتّب منشوراتك ويجدولها؟</li><li>وكيف يدخل على حسابك ويحلله، ويقولك شو لازم يتحسّن؟</li></ul></div>
+    </div>
+    <div class="bonus">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="10" width="36" height="30" rx="5" fill="#ffc934"/><rect x="6" y="6" width="18" height="8" rx="3" fill="#ffc934"/><rect x="12" y="20" width="24" height="3" rx="1.5" fill="#0f2547"/><rect x="12" y="27" width="16" height="3" rx="1.5" fill="#0f2547"/></svg>
+      <div><h3>بتطلع من الورشة ومعك قوالب جاهزة للتطبيق</h3>
+      <p>ملف فيه قوالب تساعدك تكتب محتوى يبيّن خبرتك، وترتّب حسابك بحيث العميل اللي بيدخله يفهم شو بتقدّم، وكيف بتقدر تساعده، وكيف يتواصل معك.</p><p style="margin-top:8px">بتفتح القالب، بتعبّيه بأمثلة من شغلك، وبتعدّله بأسلوبك. هيك بيكون عندك نقطة بداية واضحة كل ما بدك تكتب منشور أو تحدّث حسابك.</p></div>
+    </div>
+    <p class="bridge"><span>طيب.. وبعد الساعتين؟ شو بيتغيّر فعلياً بحسابك؟</span><i aria-hidden="true">↓</i></p>
+  </div>
+</section>
+
+<section class="band after">
+  <div class="wrap">
+    <h2>بعد الورشة.. هيك رح يصير حسابك</h2>
+    <div class="exs">
+      <img class="acct" src="acct2.jpg" alt="حساب أحد متدربين الدفعة السابقة على إكس" width="760" height="785">
+      <img class="acct" src="acct3.jpg" alt="حساب أحد متدربين الدفعة السابقة على إكس" width="760" height="785">
+    </div>
+    <p class="note exnote">أمثلة لمتدربين من الدفعة السابقة.. حساب بيعكس صورة صاحبه وخبرته من أول نظرة</p>
+    <div class="split">
+    <div class="grid">
+      <div><h3>بيفهموك من أول نظرة</h3><p>أول ما حدا يفتح حسابك، رح يعرف مين إنت ولمين بتشتغل. بدون ما تشرح.</p></div>
+      <div><h3>تموضعك واضح</h3><p>إلك قبل ما يكون للناس.. وهاد لحاله بيريّحك، لأنك بتعرف عن شو تحكي وعن شو ما تحكي.</p></div>
+      <div><h3>محتواك بيشبهك</h3><p>طالع من قصصك، من عملائك، من غلطاتك ومن اللي تعلمته. والناس بيشوفوا خبرتك بدل ما تحكيلهم عنها.</p></div>
+      <div><h3>تفاعل بيجيب المهتمين</h3><p>رح تعرف كيف تتفاعل بطريقة بتجيبلك ناس مهتمين فعلاً، مش بس متابعين.</p></div>
+    </div>
+    </div>
+    <p class="promise">ولما الحساب يصير واضح، والمحتوى ماشي، والتفاعل بمكانه.. الرسائل تبدأ تجي من ناس فهموا شو بتقدّم وجايين جاهزين.<br>ما رح أوعدك بعملاء من تاني يوم، هاد مش صح.. بس رح أوعدك إنك رح تطلع بطريق واضح، وعارف شو تعمل كل يوم لحتى توصل لهون.</p>
+    <p class="bridge"><span>طيب.. إمتى وكيف؟ هاي كل التفاصيل</span><i aria-hidden="true">↓</i></p>
+  </div>
+</section>
+
+<section class="band details" id="book">
+  <div class="wrap">
+    <div>
+      <h2>تفاصيل ورشة التمكين الرقمي</h2>
+      <div class="drow">
+        <div><small>التاريخ</small><b>الثلاثاء 1 ديسمبر</b></div>
+        <div><small>المكان</small><b>أونلاين، بث مباشر</b></div>
+        <div><small>الساعة</small><b>3 ظهرًا لـ 5 عصرًا</b></div>
+        <div><small>المقاعد</small><b>محدودة</b></div>
+        <div><small>معك</small><b>ملف قوالب جاهزة</b></div>
+        <div><small>القيمة</small><b>50 دولار</b></div>
+      </div>
+    </div>
+    <a class="btn wa" href="#">احجز مقعدك الحين</a>
+  </div>
+  <div class="wrap"><p class="bridge dk"><span>ولسا محتار؟ شوف شو حكوا اللي جرّبوا قبلك</span><i aria-hidden="true">↓</i></p></div>
+</section>
+
+<section class="band proof">
+  <div class="wrap">
+    <h2>من مشتركين برنامج التمكين الرقمي</h2>
+    <p class="intro">هاي رسائلهم زي ما وصلتني، بعد ما اشتغلنا على حضورهم ومحتواهم..</p>
+    <div class="slider"><div class="track shots"><figure class="pc"><img src="c1.jpg" alt="رسالة من hayahdesign92" loading="lazy"><figcaption><b>hayahdesign92</b><span>عرض عمل بعد سنتين بدون عملاء</span></figcaption></figure><figure class="pc"><img src="c7.jpg" alt="رسالة من Hanin · طارق · Sereen" loading="lazy"><figcaption><b>Hanin · طارق · Sereen</b><span>من مجتمع تمكين</span></figcaption></figure><figure class="pc"><img src="c4.jpg" alt="رسالة من hosam design" loading="lazy"><figcaption><b>hosam design</b><span>أول اتفاق مع عميل</span></figcaption></figure><figure class="pc"><img src="c6.jpg" alt="رسالة من حسام" loading="lazy"><figcaption><b>حسام</b><span>مصمم UI/UX</span></figcaption></figure><figure class="pc"><img src="c5.jpg" alt="رسالة من مشترك بالبرنامج" loading="lazy"><figcaption><b>مشترك بالبرنامج</b><span>7 عملاء من ورا الدليل</span></figcaption></figure><figure class="pc"><img src="c3.jpg" alt="رسالة من مشتركة بالبرنامج" loading="lazy"><figcaption><b>مشتركة بالبرنامج</b><span>عميل من بوست واحد</span></figcaption></figure><figure class="pc"><img src="c2.jpg" alt="رسالة من Rania" loading="lazy"><figcaption><b>Rania</b><span>عميل جديد</span></figcaption></figure></div><div class="snav"><button class="prev" aria-label="السابق">→</button><div class="dots"></div><button class="next" aria-label="التالي">←</button></div></div>
+    <div class="midcta"><p>بدك تكون الرسالة الجاية؟</p><a class="btn wa" href="#">احجز مقعدك</a></div>
+    <p class="bridge"><span>بس قبل ما تحجز.. تأكد إنها مناسبة إلك</span><i aria-hidden="true">↓</i></p>
+  </div>
+</section>
+
+<section class="band fit">
+  <div class="wrap">
+    <div class="box yes"><h2>لمين الورشة؟</h2><ul>
+      <li>خبير أو مستشار عنده خبرة حقيقية وبدّه يبيعها أونلاين</li>
+      <li>مدرب بدّه يستقطب متدربين لدوراته من خلال حسابه، مش بس من معارفه</li>
+      <li>مقدّم خدمات (مصمم، كاتب، محاسب، أخصائي..) بدّه عملاء بشكل مستمر</li></ul></div>
+    <div class="box no"><h2>مش مناسبة لك لو كنت..</h2><ul>
+      <li>بدك تصير مشهور بس</li>
+      <li>مش ناوي تطبّق.. لأنه الورشة كلها تطبيق</li></ul></div>
+  </div>
+  <div class="wrap fitnext"><p class="bridge"><span>وإذا لقيت حالك بالصندوق الأول وضل ببالك سؤال.. هون الجواب</span><i aria-hidden="true">↓</i></p></div>
+</section>
+
+
+
+
+<section class="band faq">
+  <div class="wrap">
+    <h2>أسئلة ممكن تكون ببالك</h2>
+    <details class="q"><summary>ما عندي متابعين كثير، بتنفعني؟</summary><p>أكيد. الوضوح أهم من العدد، وحساب صغير وواضح بيبيع أكثر من حساب كبير ومشتت.</p></details>
+    <details class="q"><summary>أنا موجود على منصة وحدة بس؟</summary><p>مش مشكلة، الأساسيات نفسها، وبنحكي عن إكس ولينكد إن وانستقرام.</p></details>
+    <details class="q"><summary>ما بعرف أكتب؟</summary><p>ولا يهمك.. رح نشتغل على قصصك إنت، والكتابة بتصير أسهل لما تعرف عن شو تحكي.</p></details>
+    <details class="q"><summary>كيف بحجز؟</summary><p>اضغط على زر الحجز، بتنفتح محادثة واتساب معي، وبرسلك طريقة الدفع ورابط الورشة الأونلاين.</p></details>
+    <details class="q"><summary>ما هي وسائل الدفع المتاحة؟</summary><ul class="pay"><li>باي بال</li><li>انستا باي (مصر)</li><li>فودافون كاش</li><li>تحويل دولي عبر الآيبان (مصرف أبو ظبي الإسلامي)</li><li>بنك فلسطين (خاص بأهل فلسطين)</li></ul></details>
+  </div>
+</section>
+
+<section class="band close">
+  <div class="wrap">
+    <h2>خبرتك تعبت عليها سنين..<br>خليها تبيّن.</h2>
+    <p style="margin:18px 0 26px;color:var(--soft)">المقاعد محدودة، والحجز بيسكّر قبل الورشة.</p>
+    <a class="btn wa" href="#">بدي أحجز مقعدي</a>
+    <div class="sign">ولاء حسّان / مختصة التسويق بالمحتوى وبناء العلامات الشخصية للخبراء العرب<br><a href="https://walaa-hassan.com">walaa-hassan.com</a> · واتساب: <span dir="ltr">+972 59 266 3938</span></div>
+  </div>
+</section>
+
+<div class="sticky"><a class="btn wa" href="#">احجز مقعدك عبر واتساب</a></div>
+
+<script>
+{
+  const msg = "مرحبا ولاء 👋 بدي أحجز مقعدي بورشة التمكين الرقمي يوم الثلاثاء 1 ديسمبر";
+  const url = "https://wa.me/972592663938?text=" + encodeURIComponent(msg);
+  for (const a of document.querySelectorAll("a.wa")) { a.href = url; a.target = "_blank"; a.rel = "noopener"; }
+}
+</script>
+<script>
+document.querySelectorAll('.slider').forEach(function(s){
+  var t=s.querySelector('.track'),cards=[].slice.call(t.children),dots=s.querySelector('.dots'),prev=s.querySelector('.prev'),next=s.querySelector('.next');
+  cards.forEach(function(c,i){var d=document.createElement('i');d.onclick=function(){go(i)};dots.appendChild(d)});
+  var ds=[].slice.call(dots.children),cur=0;
+  function go(i){i=Math.max(0,Math.min(cards.length-1,i));var c=cards[i];var tr=t.getBoundingClientRect(),cr=c.getBoundingClientRect();t.scrollBy({left:cr.right-tr.right+4,behavior:'smooth'})}
+  function upd(){var tr=t.getBoundingClientRect(),best=0,bd=1e9;cards.forEach(function(c,i){var d=Math.abs(c.getBoundingClientRect().right-tr.right);if(d<bd){bd=d;best=i}});cur=best;ds.forEach(function(d,i){d.className=i===cur?'on':''});var max=t.scrollWidth-t.clientWidth;ds.forEach(function(d,i){var b=tr.right-cards[i].getBoundingClientRect().right-t.scrollLeft;d.style.display=b<=max+6?'':'none'});prev.disabled=Math.abs(t.scrollLeft)<4;next.disabled=Math.abs(t.scrollLeft)>max-4}
+  prev.onclick=function(){go(cur-1)};next.onclick=function(){go(cur+1)};
+  t.addEventListener('scroll',function(){clearTimeout(t._u);t._u=setTimeout(upd,60)});window.addEventListener('resize',upd);upd();
+});
+</script>
+</body>
+</html>
